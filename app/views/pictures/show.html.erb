@@ -1,0 +1,88 @@
+
+<a id="coord">
+  <%= image_tag @picture.avatar_url(:large), id: 'demo-box' if @picture.avatar? %>
+</a>
+
+<div class="b-popup" id="popup1">
+  <div class="b-popup-content">
+    <span id="dialog_title_span">'+dialog_title+'</span>
+  </div>
+</div>
+
+
+
+  <br><%= @picture.name.html_safe %>
+
+
+  <p><%= button_to 'Add Info', crop_picture_path(@picture), class: 'btn btn-success btn-lg' %></p>
+<p>
+  <%= link_to 'View All Tags', picture_tags_path(@picture) %>
+</p>
+<p>
+  <%= link_to "Edit", edit_picture_path(@picture) %> |
+  <%= link_to "Destroy", @picture, method: :delete, confirm: "Are you sure?" %>
+</p>
+
+<% if @picture.errors.any? %>
+  <div class="error_messages">
+    <h2><%= pluralize(@picture.errors.count, "error") %> prohibited this picture from being saved:</h2>
+    <ul>
+      <% @picture.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= javascript_tag "var tags = #{@tags.to_json}" %>
+<%= javascript_tag "var page = #{picture_path(@picture).to_json}" %>
+<script>
+    var flag = false;
+
+    $(document).ready(function(){
+        PopUpHide();
+    });
+    function PopUpShow(){
+        $("#popup1").show();
+    }
+    function PopUpHide(){
+        $("#popup1").hide();
+        flag = false;
+    }
+
+    $('#coord').on('click', function() {
+        if (flag === true){
+            flag = false;
+            $('#coord').css('cursor','default');
+        }
+        else{
+            flag = true;
+            $('#coord').css({
+                'cursor': 'url(http://www.rw-designer.com/cursor-extern.php?id=86926), default'});
+        }
+    });
+
+    $('#coord').on('mousemove', function(ev) {
+        if (flag === false){
+            return
+        }
+        var $img = $(ev.target);
+
+        var offset = $img.offset(); // Offset from the corner of the page.
+        var xMargin = ($img.outerWidth() - $img.width()) / 2;
+        var yMargin = ($img.outerHeight() - $img.height()) / 2;
+        var x = (ev.clientX + xMargin) - offset.left;
+        var y = yMargin - offset.top + ev.pageY;
+        var i;
+        var res = [];
+        for (i = 0; i < tags.length; i++){
+            if ((x > tags[i].x && x < (tags[i].x + tags[i].w)) && (y > tags[i].y && y < (tags[i].y + tags[i].h)))
+            { res.push(' | <a href="' + page + '/tags/' + tags[i].id + "\">" + tags[i].name + "</a> | "); }
+        }
+        if (res.length == 0) { res.push("No tags"); }
+        $('#dialog_title_span').html(res);
+        if (res.length > 0) { PopUpShow(); }
+    });
+
+</script>
+

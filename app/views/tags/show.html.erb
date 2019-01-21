@@ -1,0 +1,41 @@
+<div id="content">
+  <div id="left">
+    <div class="polaroid">
+      <%= link_to image_tag(@picture.avatar_url(:thumb)), @picture if @picture.avatar? %>
+      <div class="gallery_container">
+        <p><%= link_to @picture.name.html_safe, @picture %></p>
+      </div>
+    </div>
+
+    <hr>
+    <% if @pictures_with_tag.present? %>
+      <h4>Any pictures with tag <br>
+        <h3><%= @tag.name %></h3>
+      </h4>
+      <% @pictures_with_tag.each do |picture| %>
+      <div class="polaroid">
+        <%= link_to image_tag(picture.avatar_url(:thumb)), picture if picture.avatar? %>
+        <div class="gallery_container">
+          <% link_to_tag = picture.tags.find_by(name: @tag.name) %>
+          <p><%= link_to picture.name.html_safe, picture_tag_path(picture, link_to_tag) %></p>
+        </div>
+      </div>
+      <% end %>
+     <% end %>
+  </div>
+
+  <div id="right">
+    <h1>Tags <%= @tag.name %></h1>
+    <h5>for</h5>
+    <h4><%= @picture.name.html_safe %></h4>
+    <br>
+    <%= render 'tag_form', tag: @tag %>
+
+    <% @tags.each do |tag| %>
+      <%= render 'tag_form', tag: tag %>
+    <% end %>
+  </div>
+</div>
+
+<!--<%#= link_to 'Edit', edit_picture_tag_path(@tag.picture, @tag) %> |-->
+<%#= link_to 'Back', picture_tags_path(@tag.picture) %>

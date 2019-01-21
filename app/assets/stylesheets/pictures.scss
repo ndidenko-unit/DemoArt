@@ -1,0 +1,117 @@
+// Place all the styles related to the pictures controller here.
+// They will automatically be included in application.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+div.polaroid {
+  width: 300px;
+  height: auto;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display:inline-block;
+  margin-right:10px;
+
+
+}
+
+div.gallery_container {
+  text-align: center;
+  padding: 10px 10px;
+}
+
+html {
+  background-image:linear-gradient(#eee, #aaa);
+  height:auto;
+}
+
+img.show {
+  border:solid 2px;
+  border-bottom-color:#ffe;
+  border-left-color:#eed;
+  border-right-color:#eed;
+  border-top-color:#ccb;
+  max-height:100%;
+  max-width:100%;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+
+.frame_crop {
+
+  margin-left: 15%;
+ margin-right: 20%;
+}
+
+.frame {
+  background-color:#ddc;
+  border:solid 5vmin #eee;
+  border-bottom-color:#fff;
+  border-left-color:#eee;
+  border-radius:2px;
+  border-right-color:#eee;
+  border-top-color:#ddd;
+  box-shadow:0 0 5px 0 rgba(0,0,0,.25) inset, 0 5px 10px 5px rgba(0,0,0,.25);
+  box-sizing:border-box;
+  display:inline-block;
+  margin:3vh 3vw;
+  height:80vh;
+  padding:8vmin;
+  position:relative;
+  text-align:center;
+  &:before {
+    border-radius:2px;
+    bottom:-1vmin;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,.25) inset;
+    content:"";
+    left:-1vmin;
+    position:absolute;
+    right:-1vmin;
+    top:-1vmin;
+  }
+  &:after {
+    border-radius:2px;
+    bottom:-2.5vmin;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.25);
+    content:"";
+    left:-1.5vmin;
+    position:absolute;
+    right:-1.5vmin;
+    top:-1.5vmin;
+  }
+}
+
+div.outer {
+  margin: 0 auto; /*center*/
+  width:200px;
+  background-color:red; /*just to display the example*/
+}
+
+div.inner {
+  /*move the whole container 50px to the left side*/
+  margin-left:-50px;
+  margin-right:50px;
+  /*or move the whole container 50px to the right side*/
+  /*
+  margin-left:50px;
+  margin-right:-50px;
+  */
+}
+
+//.b-popup{
+//  width:100%;
+//  min-height:100%;
+//  //background-color: rgba(0,0,0,0.5);
+//  //overflow:hidden;
+//  position:fixed;
+//  top:0px;
+//}
+.b-popup .b-popup-content{
+  margin:20px auto 0px auto;
+  width: 800px;
+  height: auto;
+  padding:10px;
+  background-color: #d3d3d3;
+  border-radius:3px;
+  box-shadow: 0px 0px 5px #000;
+}

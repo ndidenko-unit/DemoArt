@@ -1,0 +1,16 @@
+<div class="panel panel-default text-left">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <%= link_to tag.name, picture_tag_path(@picture, tag) %>
+  </div>
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item"><%= tag.text %></li>
+    <li class="list-group-item"><%= link_to tag.link, tag.link %>
+      <p class="text-right">
+        <%= link_to "Destroy", picture_tag_path(@picture, tag), method: :delete, confirm: "Are you sure?" %>
+      </p>
+    </li>
+
+  </ul>
+</div>

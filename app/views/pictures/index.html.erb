@@ -1,0 +1,11 @@
+<h1 class="text-center">Gallery</h1>
+
+<% @pictures.each do |picture| %>
+  <div class="polaroid">
+    <%= link_to image_tag(picture.avatar_url(:thumb)), picture if picture.avatar? %>
+    <div class="gallery_container">
+      <p><%= link_to picture.name.html_safe, picture %></p>
+    </div>
+  </div>
+<% end %>
+

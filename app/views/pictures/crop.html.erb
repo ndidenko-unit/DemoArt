@@ -1,0 +1,35 @@
+
+<div class="frame_crop">
+<h1>Add #Tag</h1>
+  <% if @tag.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this picture from being saved:</h2>
+      <ul>
+        <% @tag.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<%= image_tag @picture.avatar_url(:large), id: "cropbox" %>
+
+
+<%= form_for @picture, html: {multipart: true} do |f| %>
+  <% %w[x y w h].each do |attribute| %>
+    <%= f.hidden_field "crop_#{attribute}" %>
+  <% end %>
+    <br>
+    <%= f.fields_for :tag do |tag| %>
+    <%=   tag.hidden_field :picture_id, value: @picture.id %>
+      <%= tag.label :name, 'Name of #Tag (example: #smile)' %><br />
+      <%= tag.text_field :name, class: 'form-control' %><br />
+      <%= tag.label :text, 'Text of your article (100 chars min.)'%>
+      <%= tag.text_area :text, rows: 20, cols: 50, class: 'form-control' %><br />
+      <%= tag.label :link, 'Proof url link' %><br />
+      <%= tag.text_field :link, class: 'form-control' %>
+  <% end %>
+  <div class="actions">
+    <%= f.submit "Send", class: 'btn btn-success btn-lg' %>
+  </div>
+<% end %>
+</div>
